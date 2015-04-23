@@ -1,0 +1,26 @@
+{
+    "config": {
+        "server": "%server%",
+        "client": "%client%"
+    },
+    "scripts": {
+        "git-clone-all": "npm-run-all --parallel git-clone-all:*",
+        "git-clone-all:server": "cd ../ && git clone https://github.com/maxdome/resume-heartbeat-server.git",
+        "git-clone-all:client": "cd ../ && git clone https://github.com/maxdome/resume-heartbeat-client.git",
+        "git-pull-all": "npm-run-all --parallel git-pull-all:*",
+        "git-pull-all:server": "cd ../server && git pull",
+        "git-pull-all:client": "cd ../client && git pull",
+        "install-all": "npm-run-all --parallel install-all:*",
+        "install-all:server": "cd ../server && npm install",
+        "install-all:client": "cd ../client && npm install",
+        "start-all": "npm-run-all --parallel start-all:*",
+        "start-all:server": "npm-run-all --parallel start-all:server:*",
+        "start-all:server:start-watch": "cd ../server && PORT=$npm_package_config_server npm run start-watch",
+        "start-all:client": "npm-run-all --parallel start-all:client:*",
+        "start-all:client:start-watch": "cd ../client && PORT=$npm_package_config_client SERVER=http://localhost:$npm_package_config_server npm run start-watch",
+        "start-all:client:js-watch": "cd ../client && npm run js-watch"
+    },
+    "dependencies": {
+        "npm-run-all": "^1.2.2"
+    }
+}
